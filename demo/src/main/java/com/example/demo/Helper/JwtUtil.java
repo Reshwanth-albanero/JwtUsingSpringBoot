@@ -40,7 +40,7 @@ public class JwtUtil {
 
     private String doGenerateToken(Map<String,Object> Claims,String subject){
         return Jwts.builder().setClaims(Claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALID)).signWith(SignatureAlgorithm.HS512).compact();
+                .setExpiration(new Date(System.currentTimeMillis() + JWT_TOKEN_VALID)).signWith(SignatureAlgorithm.HS512,secret).compact();
     }
     public Boolean validateToken(String token,UserDetails userDetails){
         final String username = getUsernameFromToken(token);
